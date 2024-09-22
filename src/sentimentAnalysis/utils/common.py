@@ -140,5 +140,13 @@ def preprocess_text(text: str) -> str:
     tokens = text.split()  # Tokenize
     tokens = [word for word in tokens if word not in stop_words]  # Remove stop words
     tokens = [lemmatizer.lemmatize(word) for word in tokens]  # Lemmatization
-    return ' '.join(tokens)  # Return preprocessed text as a string
+    
+    preprocessed_text = ' '.join(tokens)  # Return preprocessed text as a string
+
+    if len(preprocessed_text) < 3:  # Length check
+        raise ValueError("Invalid input.")
+    
+    # You can also implement a valid word check here if needed
+
+    return preprocessed_text
 
