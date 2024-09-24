@@ -4,6 +4,7 @@ from sentimentAnalysis import logger
 from sentimentAnalysis.utils.common import get_size
 import os
 from sentimentAnalysis.config.configuration import DataIngestionConfig
+import pandas as pd
 
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
@@ -39,3 +40,12 @@ class DataIngestion:
         os.makedirs(unzip_path, exist_ok=True)
         with zipfile.ZipFile(self.config.local_data_file, 'r') as zip_ref:
             zip_ref.extractall(unzip_path)
+    
+    def read_data(self) -> pd.DataFrame:
+        """
+        Reads the CSV file after extraction and returns a DataFrame.
+        """
+        csv_file_path = os.path.join(self.config.unzip_dir, "IMDB Dataset.csv")  # Update with your actual CSV filename
+        logger.info(f"Reading data from {csv_file_path}")
+        data = pd.read_csv(csv_file_path)  # Adjust if your file is in a different format
+        return data

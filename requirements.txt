@@ -1,4 +1,4 @@
-tensorflow==2.16.1
+tensorflow
 nltk
 scikit-learn
 pandas 
@@ -12,10 +12,16 @@ seaborn
 python-box==6.0.2
 pyYAML
 tqdm
-ensure==1.0.2
+ensure
 joblib
 types-PyYAML
 scipy
 Flask
 Flask-Cors
+transformers
+torch
+requests
+pytest
+black
+keras
 -e .

@@ -1,6 +1,8 @@
 from sentimentAnalysis.constants import *
 from sentimentAnalysis.utils.common import read_yaml, create_directories
 from sentimentAnalysis.entity.config_entity import DataIngestionConfig
+from sentimentAnalysis.entity.config_entity import DataValidationConfig
+from sentimentAnalysis.entity.config_entity import DataPreprocessingConfig
 
 class ConfigurationManager:
     def __init__(
@@ -24,3 +26,21 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+    def get_data_validation_config(self):
+        config = self.config['data_validation']
+        return DataValidationConfig(
+            expected_columns=config['expected_columns'],
+            sentiment_values=config['sentiment_values']
+        )
+    
+    def get_data_preprocessing_config(self):
+        config = self.config['data_preprocessing']
+        return DataPreprocessingConfig(
+            max_words=config['max_words'],
+            max_sequence_length=config['max_sequence_length'],
+            train_test_split_ratio=config['train_test_split_ratio'],
+            random_state=config['random_state'],
+            train_data_path=config['train_data_path'],
+            test_data_path=config['test_data_path']
+        )
