@@ -21,3 +21,17 @@ class DataPreprocessingConfig:
     random_state: int
     train_data_path: Path
     test_data_path: Path
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    input_dim: int
+    output_dim: int
+    input_length: int
+    lstm_units: int
+    dropout_rate: float
+    optimizer: str
+    loss: str
+    metrics: list
+    epochs: int
+    batch_size: int
+    validation_split: float
