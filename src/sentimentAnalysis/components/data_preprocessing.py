@@ -2,6 +2,7 @@ from sentimentAnalysis.config.configuration import DataPreprocessingConfig
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.model_selection import train_test_split
+from sentimentAnalysis.utils.common import save_data
 import pandas as pd
 from sentimentAnalysis import logger
 from sentimentAnalysis.utils.common import preprocess_text
@@ -9,6 +10,7 @@ from sentimentAnalysis.utils.common import preprocess_text
 class DataPreprocessingPipeline:
     def __init__(self, config: DataPreprocessingConfig):
         self.config = config
+    
 
     def main(self, data: pd.DataFrame):
         logger.info("Starting data preprocessing...")
@@ -21,6 +23,9 @@ class DataPreprocessingPipeline:
 
         # Split data into training and test sets
         train_data, test_data = train_test_split(data, test_size=self.config.train_test_split_ratio, random_state=self.config.random_state)
+
+        save_data(train_data, self.config.train_data_path)
+        save_data(test_data, self.config.test_data_path)
 
         # Tokenize text data
         tokenizer = Tokenizer(num_words=self.config.max_words)

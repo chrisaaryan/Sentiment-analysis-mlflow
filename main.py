@@ -24,7 +24,8 @@ try:
 
      # Stage 2: Data Preprocessing
     logger.info(f">>>>>> stage {STAGE_NAME_PREPROCESSING} started <<<<<<")
-    preprocessing_pipeline = DataPreprocessingTrainingPipeline()
+    data_preprocessing_config = ConfigurationManager().get_data_preprocessing_config()
+    preprocessing_pipeline = DataPreprocessingTrainingPipeline(config= data_preprocessing_config)
     X_train, X_test, train_data, test_data = preprocessing_pipeline.main(data)
     logger.info(f">>>>>>> stage {STAGE_NAME_PREPROCESSING} completed <<<<<<<")
 

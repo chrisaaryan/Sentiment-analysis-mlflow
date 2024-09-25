@@ -5,13 +5,13 @@ from sentimentAnalysis import logger
 STAGE_NAME_PREPROCESSING = "Data Preprocessing Stage"
 
 class DataPreprocessingTrainingPipeline:
-    def __init__(self):
-        pass
+    def __init__(self, config):
+        self.config= config
 
     def main(self, data):
         try:
             # Fetch data preprocessing configuration
-            data_preprocessing_config = ConfigurationManager().get_data_preprocessing_config()
+            data_preprocessing_config = self.config
             
             # Initialize the data preprocessing pipeline
             preprocessing_pipeline = DataPreprocessingPipeline(config=data_preprocessing_config)

@@ -1,6 +1,7 @@
 import os
 from box.exceptions import BoxValueError
 import yaml
+import pandas as pd
 from sentimentAnalysis import logger
 import json
 import joblib
@@ -151,6 +152,28 @@ def preprocess_text(text: str) -> str:
 
     return preprocessed_text
 
+def save_data(data: pd.DataFrame, path: str):
+    """
+    Save the given data (e.g., pandas DataFrame) to the specified path.
+
+    Args:
+        data (pd.DataFrame): The data to save (typically a pandas DataFrame).
+        path (str): The path to save the data file.
+    """
+    try:
+        # Create directory if it doesn't exist
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
+        # Save data to CSV or other format as needed
+        data.to_csv(path, index=False)
+
+        logger.info(f"Data successfully saved to {path}.")
+
+    except Exception as e:
+        logger.exception(f"Error occurred while saving data to {path}: {e}")
+        raise e
+
+@ensure_annotations
 def save_model(model, save_path):
     """
     Save the trained model to the specified path.
