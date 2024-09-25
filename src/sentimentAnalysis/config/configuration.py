@@ -60,5 +60,6 @@ class ConfigurationManager:
             metrics=model_config['metrics'],
             epochs=model_config['epochs'],
             batch_size=model_config['batch_size'],
-            validation_split=model_config['validation_split']
+            validation_split=model_config['validation_split'],
+            save_model_path=model_config['save_model_path']
         )

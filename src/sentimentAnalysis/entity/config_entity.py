@@ -35,3 +35,4 @@ class ModelTrainingConfig:
     epochs: int
     batch_size: int
     validation_split: float
+    save_model_path: Path

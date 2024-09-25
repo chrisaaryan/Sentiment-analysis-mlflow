@@ -3,7 +3,7 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense
 from sentimentAnalysis import logger
 
 class ModelBuilder:
-    def __init__(self, input_dim, output_dim, input_length, lstm_units, dropout_rate, optimizer, loss, metrics, epochs, batch_size, validation_split):
+    def __init__(self, input_dim, output_dim, input_length, lstm_units, dropout_rate, optimizer, loss, metrics, epochs, batch_size, validation_split, save_model_path):
         self.input_dim = input_dim
         self.output_dim = output_dim
         self.input_length = input_length
@@ -15,6 +15,7 @@ class ModelBuilder:
         self.epochs = epochs
         self.batch_size = batch_size
         self.validation_split = validation_split
+        self.save_model_path = save_model_path
 
     def build_model(self):
         """

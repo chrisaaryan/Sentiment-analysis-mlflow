@@ -10,3 +10,4 @@ model_config:
   epochs: 5
   batch_size: 32
   validation_split: 0.2
+  save_model_path: artifacts/model/model.h5

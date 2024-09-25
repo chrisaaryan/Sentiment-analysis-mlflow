@@ -12,6 +12,7 @@ import base64
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from tensorflow.keras.models import Sequential
 import re
 
 nltk.download('stopwords')
@@ -149,4 +150,21 @@ def preprocess_text(text: str) -> str:
     # You can also implement a valid word check here if needed
 
     return preprocessed_text
+
+def save_model(model, save_path):
+    """
+    Save the trained model to the specified path.
+    """
+    try:
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        logger.info("Function called")
+        # Save the model
+        logger.info(f"Saving the model to {save_path}...")
+        model.save(save_path)
+        logger.info(f"Model saved successfully at {save_path}.")
+
+    except Exception as e:
+        logger.exception(f"Error occurred while saving the model: {e}")
+        raise e
 

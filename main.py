@@ -35,5 +35,5 @@ try:
     logger.info(f">>>>>>> stage {STAGE_NAME_MODEL_TRAINING} completed <<<<<<<")
 
 except Exception as e:
-    logger.exception(e)
+    logger.exception("An error occurred during the pipeline execution: ", exc_info=e)
     raise e

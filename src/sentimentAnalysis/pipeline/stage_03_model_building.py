@@ -1,6 +1,7 @@
 from sentimentAnalysis.config.configuration import ConfigurationManager
 from sentimentAnalysis.components.model_builder import ModelBuilder
 from sentimentAnalysis import logger
+from sentimentAnalysis.utils.common import save_model
 
 STAGE_NAME_MODEL_TRAINING = "Model Training Stage"
 
@@ -26,7 +27,8 @@ class ModelTrainingPipeline:
                 metrics=model_config.metrics,
                 epochs=model_config.epochs,              
                 batch_size=model_config.batch_size,      
-                validation_split=model_config.validation_split  
+                validation_split=model_config.validation_split,
+                save_model_path=model_config.save_model_path
             )
 
             # Build and compile the model
@@ -36,6 +38,9 @@ class ModelTrainingPipeline:
             logger.info("Starting model training...")
             model.fit(X_train, Y_train, epochs=model_config.epochs, batch_size=model_config.batch_size, validation_split=model_config.validation_split)
             logger.info("Model training completed successfully.")
+
+            save_model(model, model_config.save_model_path)
+            logger.info("Model saved successfully !")
 
             return model
 
