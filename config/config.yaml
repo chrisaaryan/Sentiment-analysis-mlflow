@@ -19,3 +19,6 @@ data_preprocessing:
   random_state: 42
   train_data_path: artifacts/IMDB_Dataset/train_data.csv
   test_data_path: artifacts/IMDB_Dataset/test_data.csv
+
+mlflow_config:
+  mlflow_uri: https://dagshub.com/chrisaaryan/my-first-repo.mlflow

@@ -1,13 +1,33 @@
+## LSTM
+# model_config:
+#   input_dim: 10000
+#   output_dim: 1
+#   input_length: 200
+#   lstm_units: 128
+#   dropout_rate: 0.5
+#   recurrent_dropout_rate: 0.2 
+#   optimizer: "adam"
+#   learning_rate: 0.001 
+#   loss: "binary_crossentropy"
+#   metrics: ["accuracy"]
+#   epochs: 8
+#   batch_size: 32
+#   validation_split: 0.2
+#   early_stopping:                    # Add early stopping to avoid overfitting
+#     monitor: "val_loss"
+#     patience: 2                      # Stop training if no improvement in 3 epochs
+#     mode: "min"
+#   save_model_path: artifacts/model/model.h5
+
+##RF Classifier
 model_config:
-  input_dim: 10000
-  output_dim: 1
-  input_length: 200
-  lstm_units: 128
-  dropout_rate: 0.2
-  optimizer: "adam"
-  loss: "binary_crossentropy"
-  metrics: ["accuracy"]
-  epochs: 5
-  batch_size: 32
-  validation_split: 0.2
-  save_model_path: artifacts/model/model.h5
+  n_estimators: 100
+  max_depth: 10
+  min_samples_split: 5
+  min_samples_leaf: 2
+  max_features: "sqrt"
+  bootstrap: True
+  class_weight: "balanced"
+  random_state: 42
+  save_model_path: artifacts/model/model.joblib
+

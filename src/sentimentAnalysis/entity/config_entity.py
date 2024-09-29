@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing import List
 
 @dataclass(frozen=True)
 class DataIngestionConfig:
@@ -29,10 +30,34 @@ class ModelTrainingConfig:
     input_length: int
     lstm_units: int
     dropout_rate: float
+    recurrent_dropout_rate: float  
     optimizer: str
+    learning_rate: float 
     loss: str
-    metrics: list
+    metrics: List[str]
     epochs: int
     batch_size: int
     validation_split: float
+    early_stopping_monitor: str  
+    early_stopping_patience: int 
     save_model_path: Path
+
+@dataclass(frozen=True)
+class RFModelTrainingConfig:
+    n_estimators: int
+    max_depth: int
+    min_samples_split: int
+    min_samples_leaf: int
+    max_features: str
+    bootstrap: bool
+    class_weight: str
+    random_state: int
+    save_model_path: Path
+
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    path_of_model: Path
+    # test_data: Path
+    all_params: dict
+    mlflow_uri: str

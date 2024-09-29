@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/PROJECTS/imdb%2050k%20NLP/Sentiment-analysis-mlflow/mlruns/0/656008775801428baa08916f941badd6/artifacts
+end_time: 1727598461828
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 656008775801428baa08916f941badd6
+run_name: dazzling-ram-416
+run_uuid: 656008775801428baa08916f941badd6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727598451715
+status: 3
+tags: []
+user_id: DELL

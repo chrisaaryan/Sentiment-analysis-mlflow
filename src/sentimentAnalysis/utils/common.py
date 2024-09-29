@@ -147,10 +147,24 @@ def preprocess_text(text: str) -> str:
 
     if len(preprocessed_text) < 3:  # Length check
         raise ValueError("Invalid input.")
-    
-    # You can also implement a valid word check here if needed
-
     return preprocessed_text
+    # text = text.lower()  # Lowercase
+    # text = re.sub(r'\W', ' ', text)  # Remove non-word characters
+    # text = re.sub(r'\s+', ' ', text)  # Remove extra spaces
+    # text = re.sub(r'\d+', '', text)  # Remove numbers
+    # tokens = text.split()  # Tokenize
+    
+    # # You could also handle contractions here
+
+    # tokens = [word for word in tokens if word not in stop_words]  # Remove stop words
+    # tokens = [lemmatizer.lemmatize(word) for word in tokens]  # Lemmatization
+
+    # preprocessed_text = ' '.join(tokens)
+
+    # if len(preprocessed_text) < 3:  # Length check
+    #     raise ValueError("Invalid input.")
+    
+    # return preprocessed_text
 
 def save_data(data: pd.DataFrame, path: str):
     """
@@ -179,15 +193,30 @@ def save_model(model, save_path):
     Save the trained model to the specified path.
     """
     try:
-        # Ensure the directory exists
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        logger.info("Function called")
-        # Save the model
-        logger.info(f"Saving the model to {save_path}...")
-        model.save(save_path)
+        logger.info("Saving the model using joblib...")
+
+        # Save the model using joblib
+        joblib.dump(model, save_path)
         logger.info(f"Model saved successfully at {save_path}.")
 
     except Exception as e:
         logger.exception(f"Error occurred while saving the model: {e}")
         raise e
+    
+def load_data(file_path: str) -> pd.DataFrame:
+    """
+    Load data from a specified file path.
+
+    Args:
+        file_path (str): The path to the file to be loaded.
+
+    Returns:
+        pd.DataFrame: The loaded data as a DataFrame.
+    """
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except Exception as e:
+        raise ValueError(f"Error loading data from {file_path}: {e}")
 
