@@ -13,16 +13,22 @@ class DataIngestionTrainingPipeline:
         data_ingestion_config = config.get_data_ingestion_config()
         data_ingestion = DataIngestion(config=data_ingestion_config)
         # Check if data is already extracted
-        extracted_file_path = os.path.join(data_ingestion_config.unzip_dir, "IMDB Dataset.csv")
-        if os.path.exists(extracted_file_path):
-            logger.info("Ingested data already exists, skipping download and extraction.")
-            data = pd.read_csv(extracted_file_path)
-        else:
+        # extracted_file_path = os.path.join(data_ingestion_config.unzip_dir, "IMDB Dataset.csv")
+        # if os.path.exists(extracted_file_path):
+        # logger.info("Ingested data already exists, skipping download and extraction.")
+        # data = pd.read_csv(extracted_file_path)
+        # else:
             # Download and extract if not present
-            data_ingestion.download_file()
-            data_ingestion.extract_zip_file()
-            data = data_ingestion.read_data()
+        data_ingestion.download_file()
+        data_ingestion.extract_zip_file()
+        data = data_ingestion.read_data()
+        output_dir = 'artifacts/data_ingestion'
+        os.makedirs(output_dir, exist_ok=True)
 
+        # Save the DataFrame directly to CSV
+        output_file_path = os.path.join(output_dir, "IMDB_Dataset.csv")
+        logger.info(f"Saving ingested data to {output_file_path}")
+        pd.DataFrame(data).to_csv(output_file_path, index=False)
         return data
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 from sentimentAnalysis.config.configuration import ConfigurationManager
 from sentimentAnalysis.components.model_eval import Evaluation
 from sentimentAnalysis import logger
+from sentimentAnalysis.utils.common import load_data
 
 STAGE_NAME_MODEL_EVALUATION = "Model Evaluation Stage"
 
@@ -30,7 +31,9 @@ if __name__ == '__main__':
     try:
         logger.info(f">>>>>> stage {STAGE_NAME_MODEL_EVALUATION} started <<<<<<")
         obj = EvaluationPipeline()
-        obj.main()
+        X_test= load_data('artifacts/data_preprocessing/X_test.csv')
+        test_data= load_data('artifacts/data_preprocessing/test_data.csv')
+        obj.main(X_test, test_data["sentiment"])
 
         logger.info(f">>>>>>> stage {STAGE_NAME_MODEL_EVALUATION} completed <<<<<<<")
 

@@ -75,6 +75,7 @@ from sentimentAnalysis.config.configuration import ConfigurationManager
 from sentimentAnalysis.components.model_builder import ModelBuilder
 from sentimentAnalysis import logger
 from sentimentAnalysis.utils.common import save_model
+from sentimentAnalysis.utils.common import load_data
 
 STAGE_NAME_MODEL_TRAINING = "Model Training Stage"
 
@@ -128,7 +129,9 @@ if __name__ == '__main__':
         # Make sure X_train and Y_train are available here
         # You can load them from preprocessed files or any other source
          # Replace with actual data loading function
-        obj.main()
+        X_train= load_data('artifacts/data_preprocessing/X_train.csv')
+        train_data= load_data('artifacts/data_preprocessing/train_data.csv')
+        model= obj.main(X_train, train_data["sentiment"])
 
         logger.info(f">>>>>>> stage {STAGE_NAME_MODEL_TRAINING} completed <<<<<<<")
 

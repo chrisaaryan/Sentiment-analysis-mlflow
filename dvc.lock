@@ -1,0 +1,108 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/sentimentAnalysis/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: src/sentimentAnalysis/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: d2cbb7c71231edc71836f83c23af4333
+      size: 1770
+    outs:
+    - path: artifacts/data_ingestion/IMDB_Dataset.csv
+      hash: md5
+      md5: 325be553cb5850b6e67a01e716c3b3e8
+      size: 66262310
+  data_preprocessing:
+    cmd: python src/sentimentAnalysis/pipeline/stage_02_data_preprocessing.py
+    deps:
+    - path: artifacts/data_ingestion/IMDB_Dataset.csv
+      hash: md5
+      md5: 325be553cb5850b6e67a01e716c3b3e8
+      size: 66262310
+    - path: config/config.yaml
+      hash: md5
+      md5: c7f169d565e92300af32cd2c0b1072ba
+      size: 724
+    - path: src/sentimentAnalysis/pipeline/stage_02_data_preprocessing.py
+      hash: md5
+      md5: 455801ae4d9e6c9472454df2fe558339
+      size: 3760
+    outs:
+    - path: artifacts/data_preprocessing/X_test.csv
+      hash: md5
+      md5: d64f365f084f8508d6ad68599462769d
+      size: 212840296
+    - path: artifacts/data_preprocessing/X_train.csv
+      hash: md5
+      md5: 8471ab6bc0d6a45d56a904bdedae206d
+      size: 851155895
+    - path: artifacts/data_preprocessing/test_data.csv
+      hash: md5
+      md5: bcb33a10f512d6383339e15545cb3e9b
+      size: 21440773
+    - path: artifacts/data_preprocessing/train_data.csv
+      hash: md5
+      md5: 8f6723927ffe548e6f88890ccc1f55f4
+      size: 85418509
+  model_training:
+    cmd: python src/sentimentAnalysis/pipeline/stage_03_model_building.py
+    deps:
+    - path: artifacts/data_preprocessing/X_train.csv
+      hash: md5
+      md5: 8471ab6bc0d6a45d56a904bdedae206d
+      size: 851155895
+    - path: artifacts/data_preprocessing/train_data.csv
+      hash: md5
+      md5: 8f6723927ffe548e6f88890ccc1f55f4
+      size: 85418509
+    - path: params.yaml
+      hash: md5
+      md5: d63ddadbe934c06bde54a07ce11d7dc0
+      size: 862
+    - path: src/sentimentAnalysis/pipeline/stage_03_model_building.py
+      hash: md5
+      md5: 54474bed0e071b38b5b15912b0f2b1cc
+      size: 5716
+    params:
+      params.yaml:
+        model_config.bootstrap: true
+        model_config.class_weight: balanced
+        model_config.max_depth: 10
+        model_config.max_features: sqrt
+        model_config.min_samples_leaf: 2
+        model_config.min_samples_split: 5
+        model_config.n_estimators: 100
+        model_config.random_state: 42
+    outs:
+    - path: artifacts/model/model.joblib
+      hash: md5
+      md5: 2a1ba890f6b6504bffe6e52621a4dfca
+      size: 2314393
+  model_evaluation:
+    cmd: python src/sentimentAnalysis/pipeline/stage_04_model_eval.py
+    deps:
+    - path: artifacts/data_preprocessing/X_test.csv
+      hash: md5
+      md5: d64f365f084f8508d6ad68599462769d
+      size: 212840296
+    - path: artifacts/data_preprocessing/test_data.csv
+      hash: md5
+      md5: bcb33a10f512d6383339e15545cb3e9b
+      size: 21440773
+    - path: artifacts/model/model.joblib
+      hash: md5
+      md5: 2a1ba890f6b6504bffe6e52621a4dfca
+      size: 2314393
+    - path: config/config.yaml
+      hash: md5
+      md5: c7f169d565e92300af32cd2c0b1072ba
+      size: 724
+    - path: src/sentimentAnalysis/pipeline/stage_04_model_eval.py
+      hash: md5
+      md5: 5023e1295857b8fd62e1fcf32148d48b
+      size: 1622
+    outs:
+    - path: evaluation_scores.json
+      hash: md5
+      md5: 37993dabbba32d7f0de4713512964536
+      size: 126
