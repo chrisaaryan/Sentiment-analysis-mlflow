@@ -1,0 +1,1 @@
+{'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'bootstrap': True, 'class_weight': 'balanced', 'random_state': 42, 'save_model_path': 'artifacts/model/model.joblib'}

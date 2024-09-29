@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/PROJECTS/imdb%2050k%20NLP/Sentiment-analysis-mlflow/mlruns/0/0ff92f8996ee4d31a58b4acb53cdac22/artifacts
+end_time: 1727601107830
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0ff92f8996ee4d31a58b4acb53cdac22
+run_name: hilarious-grub-512
+run_uuid: 0ff92f8996ee4d31a58b4acb53cdac22
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727601099714
+status: 3
+tags: []
+user_id: DELL

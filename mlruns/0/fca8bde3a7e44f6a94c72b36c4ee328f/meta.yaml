@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/PROJECTS/imdb%2050k%20NLP/Sentiment-analysis-mlflow/mlruns/0/fca8bde3a7e44f6a94c72b36c4ee328f/artifacts
+end_time: 1727600836253
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fca8bde3a7e44f6a94c72b36c4ee328f
+run_name: worried-bug-713
+run_uuid: fca8bde3a7e44f6a94c72b36c4ee328f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727600826265
+status: 3
+tags: []
+user_id: DELL

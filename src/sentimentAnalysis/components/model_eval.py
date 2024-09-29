@@ -9,6 +9,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 from sentimentAnalysis.utils.common import save_json
 from sentimentAnalysis.config.configuration import EvaluationConfig
+from sentimentAnalysis import logger
+import os
 
 class Evaluation:
     def __init__(self, config: EvaluationConfig):
@@ -76,10 +78,12 @@ class Evaluation:
         save_json(path=Path("evaluation_scores.json"), data=self.metrics)
 
     def log_into_mlflow(self):
+        os.environ['MLFLOW_TRACKING_URI']= 'https://dagshub.com/chrisaaryan/my-first-repo.mlflow'
+        os.environ['MLFLOW_TRACKING_USERNAME']= 'chrisaaryan'
+        os.environ['MLFLOW_TRACKING_PASSWORD']= '97f85b6ca1fc224edc2875d929cf45a081ca85b1'
         # Set MLflow tracking URI
         mlflow.set_registry_uri(self.config.mlflow_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-
         # Start logging with MLflow
         with mlflow.start_run():
             # Log parameters and metrics
@@ -88,6 +92,36 @@ class Evaluation:
 
             # Log the model to MLflow
             if tracking_url_type_store != "file":
+                print("model logged")
                 mlflow.sklearn.log_model(self.model, "model", registered_model_name="SentimentAnalysisModel2")
             else:
+                print("model logged")
                 mlflow.sklearn.log_model(self.model, "model")
+
+    # def log_into_mlflow(self):
+    #     try:
+    #         print("entered")
+    #         mlflow.set_tracking_uri(self.config.mlflow_uri)  # DAGsHub tracking URI
+    #         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+    #         print("moved")
+
+    #         # Log into MLflow
+    #         with mlflow.start_run():
+    #             print("entered_again")
+
+    #             # Log parameters and metrics
+    #             mlflow.log_params(self.config.all_params)
+    #             mlflow.log_metrics(self.metrics)
+
+    #             if tracking_url_type_store != "file":
+    #                 print("model logged")
+    #                 mlflow.sklearn.log_model(self.model, "model", registered_model_name="SentimentAnalysisModel2")
+    #             else:
+    #                 print("model logged")
+    #                 mlflow.sklearn.log_model(self.model, "model")
+    #         print(f"🏃 View run at: {mlflow.get_run(mlflow.active_run().info.run_id).info.artifact_uri}")
+    #         print(f"🧪 View experiment at: {mlflow.get_tracking_uri()}")
+
+    #     except Exception as e:
+    #         logger.exception(f"Error during MLflow logging: {e}")
+    #         raise e

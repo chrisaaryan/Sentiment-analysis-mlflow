@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/PROJECTS/imdb%2050k%20NLP/Sentiment-analysis-mlflow/mlruns/0/0afd0b1f7c414cfe84bf5e6549ff5f8b/artifacts
+end_time: 1727601749703
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0afd0b1f7c414cfe84bf5e6549ff5f8b
+run_name: respected-croc-502
+run_uuid: 0afd0b1f7c414cfe84bf5e6549ff5f8b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727601740254
+status: 3
+tags: []
+user_id: DELL
